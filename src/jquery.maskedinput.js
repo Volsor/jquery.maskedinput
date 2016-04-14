@@ -13,8 +13,6 @@
 
     var ua = navigator.userAgent,
         iPhone = /iphone/i.test(ua),
-        chrome = /chrome/i.test(ua),
-        android = /android/i.test(ua),
         caretTimeoutId;
 
     $.mask = {
@@ -266,17 +264,7 @@
                                 buffer[p] = c;
                                 writeBuffer();
                                 next = seekNext(p);
-
-                                if (android) {
-                                    //Path for CSP Violation on FireFox OS 1.1
-                                    var proxy = function () {
-                                        $.proxy($.fn.caret, input, next)();
-                                    };
-
-                                    setTimeout(proxy, 0);
-                                } else {
-                                    input.caret(next);
-                                }
+                                input.caret(next);
                                 if (pos.begin <= lastRequiredNonMaskPos) {
                                     tryFireCompleted();
                                 }
