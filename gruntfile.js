@@ -38,7 +38,7 @@ module.exports = function( grunt ) {
             "spec/lib/matchers.js",
             "spec/lib/jasmine-species/jasmine-grammar.js",
             "spec/lib/setup.js",
-            "lib/jquery-1.9.0.min.js",
+            "spec/lib/jquery-1.9.0.min.js",
             "spec/lib/jquery.keymasher.js"
           ]
         }
