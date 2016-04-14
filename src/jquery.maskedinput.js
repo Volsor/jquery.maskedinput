@@ -198,39 +198,6 @@
                     }
                 }
 
-                function androidInputEvent(e) {
-                    var curVal = input.val();
-                    var pos = input.caret();
-                    if (oldVal && oldVal.length && oldVal.length > curVal.length) {
-                        // a deletion or backspace happened
-                        checkVal(true);
-                        while (pos.begin > 0 && !tests[pos.begin - 1])
-                            pos.begin--;
-                        if (pos.begin === 0) {
-                            while (pos.begin < firstNonMaskPos && !tests[pos.begin])
-                                pos.begin++;
-                        }
-                        input.caret(pos.begin, pos.begin);
-                    } else {
-                        var lastEnteredValue = curVal.charAt(pos.begin);
-                        if (pos.begin < len) {
-                            if (!tests[pos.begin]) {
-                                pos.begin++;
-                                if (tests[pos.begin].test(lastEnteredValue)) {
-                                    pos.begin++;
-                                }
-                            } else {
-                                if (tests[pos.begin].test(lastEnteredValue)) {
-                                    pos.begin++;
-                                }
-                            }
-                        }
-                        input.caret(pos.begin, pos.begin);
-                    }
-                    tryFireCompleted();
-                }
-
-
                 function blurEvent(e) {
                     checkVal();
 
@@ -435,11 +402,6 @@
                             tryFireCompleted();
                         }, 0);
                     });
-                if (chrome && android) {
-                    input
-                        .off('input.mask')
-                        .on('input.mask', androidInputEvent);
-                }
                 checkVal(); //Perform initial check for existing values
             });
         }
