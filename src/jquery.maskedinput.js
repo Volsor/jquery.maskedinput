@@ -78,7 +78,7 @@
 
             if (!mask && this.length > 0) {
                 input = $(this[0]);
-                var fn = input.data($.mask.dataName)
+                var fn = input.data($.mask.dataName);
                 return fn ? fn() : undefined;
             }
 
@@ -212,7 +212,6 @@
                         }
                         input.caret(pos.begin, pos.begin);
                     } else {
-                        var pos2 = checkVal(true);
                         var lastEnteredValue = curVal.charAt(pos.begin);
                         if (pos.begin < len) {
                             if (!tests[pos.begin]) {
