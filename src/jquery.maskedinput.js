@@ -346,36 +346,39 @@
                 });
 
 
+                function checkPosition() {
+                    if (input.prop("readonly")) {
+                        return;
+                    }
+
+                    clearTimeout(caretTimeoutId);
+                    var pos;
+
+                    focusText = input.val();
+
+                    pos = checkVal();
+
+                    caretTimeoutId = setTimeout(function () {
+                        if (input.get(0) !== document.activeElement) {
+                            return;
+                        }
+                        writeBuffer();
+                        if (pos == mask.replace("?", "").length) {
+                            input.caret(0, pos);
+                        } else {
+                            input.caret(pos);
+                        }
+                    }, 10);
+                }
+
                 input
                     .one("unmask", function () {
                         input
                             .off(".mask")
                             .removeData($.mask.dataName);
                     })
-                    .on("focus.mask", function () {
-                        if (input.prop("readonly")) {
-                            return;
-                        }
-
-                        clearTimeout(caretTimeoutId);
-                        var pos;
-
-                        focusText = input.val();
-
-                        pos = checkVal();
-
-                        caretTimeoutId = setTimeout(function () {
-                            if (input.get(0) !== document.activeElement) {
-                                return;
-                            }
-                            writeBuffer();
-                            if (pos == mask.replace("?", "").length) {
-                                input.caret(0, pos);
-                            } else {
-                                input.caret(pos);
-                            }
-                        }, 10);
-                    })
+                    .on("click", checkPosition)
+                    .on("focus.mask", checkPosition)
                     .on("blur.mask", blurEvent)
                     .on("keydown.mask", keydownEvent)
                     .on("keypress.mask", keypressEvent)

@@ -1,6 +1,6 @@
 {
   "name": "jquery.maskedinput",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "author": "Josh Bush (digitalbush.com)",
   "description": "jQuery Masked Input Plugin",
   "devDependencies": {

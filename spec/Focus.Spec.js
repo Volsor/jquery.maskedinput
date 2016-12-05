@@ -65,7 +65,7 @@ feature("Focusing A Masked Input",function(){
 
 	scenario("Masking a hidden input",function(){
 		var error;
-		$(window).on("error.test",function(err){error=err;})
+		$(window).on("error.test",function(err){error=err;});
 
 		given("a mask on a hidden input",function(){
 			input.hide().mask("9");
@@ -94,6 +94,23 @@ feature("Focusing A Masked Input",function(){
 		});
 		then("the input partial value should remain",function(){
 			expect(input).toHaveValue("1_");
+		});
+		then("the input partial value should remain",function(){
+			expect(input).toHaveValue("1_");
+		});
+		then("caret position should be correct",function(){
+			var caret = input.caret();
+			expect(caret.begin).toEqual(2);
+			expect(caret.end).toEqual(2);
+		});
+		when("clicking on the input",function(){
+			input.caret(3, 3);
+			input.click()
+		});
+		then("caret position should be correct",function(){
+			var caret = input.caret();
+			expect(caret.begin).toEqual(2);
+			expect(caret.end).toEqual(2);
 		});
 	});
 
@@ -159,7 +176,7 @@ feature("Leaving A Masked Input",function(){
 		});
 		when("typing one character and blurring",function(){
 			input.caret(0);
-			input.mashKeys("1")
+			input.mashKeys("1");
 			input.blur();
 		});
 		then("value should remain visible with placeholders",function(){
