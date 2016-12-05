@@ -377,8 +377,7 @@
                             .off(".mask")
                             .removeData($.mask.dataName);
                     })
-                    .on("click.mask", checkPosition)
-                    .on("focus.mask", checkPosition)
+                    .on("focus.mask click.mask dblclick.mask", checkPosition)
                     .on("blur.mask", blurEvent)
                     .on("keydown.mask", keydownEvent)
                     .on("keypress.mask", keypressEvent)
